@@ -26,10 +26,10 @@ jobs:
         run: yarn install --frozen-lockfile
       - name: Build
         run: yarn build
-      - name: cdk bootstrap
+      - name: cdk deploy
         uses: youyo/aws-cdk-github-actions@v2
         with:
-          cdk_subcommand: "bootstrap"
+          cdk_subcommand: "deploy"
           actions_comment: true
           working_dir: "./infra"
         env:
