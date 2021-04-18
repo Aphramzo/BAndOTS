@@ -12,6 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ENVIRONMENT: prod
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -25,10 +26,10 @@ jobs:
         run: yarn install --frozen-lockfile
       - name: Build
         run: yarn build
-      - name: cdk diff
+      - name: cdk bootstrap
         uses: youyo/aws-cdk-github-actions@v2
         with:
-          cdk_subcommand: "diff"
+          cdk_subcommand: "bootstrap"
           actions_comment: true
           working_dir: "./infra"
         env:
