@@ -1,0 +1,39 @@
+name: Deploy
+
+on:
+  pull_request:
+    types:
+      - labeled
+
+jobs:
+  deploy-branch:
+    name: "Deploy Branch"
+    if: contains(github.event.pull_request.labels.*.name, 'deploy')
+    runs-on: ubuntu-latest
+    env:
+      ENVIRONMENT: prod
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Build
+        run: yarn build
+      - name: cdk deploy
+        uses: youyo/aws-cdk-github-actions@v2
+        with:
+          cdk_subcommand: "deploy"
+          actions_comment: true
+          working_dir: "./infra"
+          cdk_args: "--require-approval never"
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: "us-west-1"
