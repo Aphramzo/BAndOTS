@@ -6,8 +6,10 @@ Latest iteration of the BrokkAndOdin site. Full CI/CD integration.
 
 This project is deployed via github actions. On creation of a PR to main, all tests will be run. Once the PR was been reviewed, add a `deploy` label to begin the deployment.
 
+\*Note: If trying to deploy to an AWS account that has never used CDK, you may need to run `cdk bootstrap` to create the needed CDK CloudFormation stack.
+
 \*Note: Typically this would be done on approval, but since this is
-currently only developed by me, this is a fair work around.
+currently only developed by me, this is a fair work around
 
 ## Available Scripts
 
