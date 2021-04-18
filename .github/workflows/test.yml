@@ -6,9 +6,9 @@ on:
       - main
 
 jobs:
-  lint-and-test-pr:
-    name: "Lint and Test PR"
-    runs-on: ubuntu-18.04
+  test-pr:
+    name: "Test PR"
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2

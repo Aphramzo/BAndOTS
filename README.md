@@ -4,8 +4,10 @@ Latest iteration of the BrokkAndOdin site. Full CI/CD integration.
 
 ## Workflow
 
-This project is deployed via github actions. On creation of a PR to main, all tests will be run. If everything looks good,
-it will deploy via aws cdk as defined in the `infra` folder.
+This project is deployed via github actions. On creation of a PR to main, all tests will be run. Once the PR was been reviewed, add a `deploy` label to begin the deployment.
+
+\*Note: Typically this would be done on approval, but since this is
+currently only developed by me, this is a fair work around.
 
 ## Available Scripts
 
