@@ -39,6 +39,7 @@ export class InfraStack extends cdk.Stack {
 
     const cName = new route53.CnameRecord(this, 'baseZone', {
       zone: zone,
+      recordName: 'alpha',
       domainName: bucket.bucketWebsiteDomainName,
     });
   }

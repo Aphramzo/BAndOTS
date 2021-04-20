@@ -13,6 +13,7 @@ jobs:
     env:
       ENVIRONMENT: prod
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      CDK_ACCOUNT: ${{ secrets.CDK_ACCOUNT }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
