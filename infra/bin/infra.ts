@@ -6,6 +6,7 @@ import { InfraStack } from '../lib/infra-stack';
 const app = new cdk.App();
 new InfraStack(app, 'BrokkAndOdinStack', {
   env: {
-    region: 'us-west-1' 
-  }
+    account: process.env.CDK_ACCOUNT,
+    region: 'us-west-1',
+  },
 });

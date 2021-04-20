@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy-branch:
-    name: "Deploy Branch"
+    name: 'Deploy Branch'
     if: contains(github.event.pull_request.labels.*.name, 'deploy')
     runs-on: ubuntu-latest
     env:
@@ -24,16 +24,19 @@ jobs:
           node-version: 14
       - name: Install dependencies
         run: yarn install --frozen-lockfile
+      - name: test
+        run: yarn test
       - name: Build
         run: yarn build
       - name: cdk deploy
         uses: youyo/aws-cdk-github-actions@v2
         with:
-          cdk_subcommand: "deploy"
+          cdk_subcommand: 'deploy'
           actions_comment: true
-          working_dir: "./infra"
-          cdk_args: "--require-approval never"
+          working_dir: './infra'
+          cdk_args: '--require-approval never'
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: "us-west-1"
+          AWS_DEFAULT_REGION: 'us-west-1'
+          CDK_ACCOUNT: ${{ secrets.CDK_ACCOUNT }}
