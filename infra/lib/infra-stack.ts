@@ -3,6 +3,7 @@ import * as s3 from '@aws-cdk/aws-s3';
 import * as s3Deploy from '@aws-cdk/aws-s3-deployment';
 import * as cloudfront from '@aws-cdk/aws-cloudfront';
 import * as route53 from '@aws-cdk/aws-route53';
+import targets = require('@aws-cdk/aws-route53-targets/lib');
 
 export class InfraStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
@@ -37,10 +38,10 @@ export class InfraStack extends cdk.Stack {
       ],
     });
 
-    const cName = new route53.CnameRecord(this, 'BAndORecord', {
+    // route53 record pointing to new cf distro
+    const aRecord = new route53.ARecord(this, 'BAndOARecord', {
       zone: zone,
-      recordName: 'alpha',
-      domainName: bucket.bucketWebsiteDomainName,
+      target: route53.RecordTarget.fromAlias(new targets.CloudFrontTarget(cf)),
     });
   }
 }

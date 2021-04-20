@@ -40,3 +40,9 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: 'us-west-1'
           CDK_ACCOUNT: ${{ secrets.CDK_ACCOUNT }}
+      - name: automerge
+        uses: 'pascalgn/automerge-action@v0.6.1'
+        env:
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+          MERGE_LABELS: 'deploy,!work in progress,!wip,!WIP'
+          MERGE_METHOD: 'squash'
