@@ -1,24 +1,5 @@
-import { iFlickrPhoto, iFlickrApiResponse, iImage } from '../consts/types';
-
-function FlickerResponseToImages(
-  response: iFlickrApiResponse | undefined,
-): Array<iImage> {
-  if (!response) return [];
-
-  return response.photos.photo.map((photo: iFlickrPhoto) => ({
-    date: photo.datetaken,
-    description: photo.description['_content'],
-    largeWidth: photo.width_l,
-    smallHeight: photo.height_n || 180,
-    smallWidth: photo.width_n || 320,
-    tags: photo.tags.split(' '),
-    urlLarge: photo.url_l,
-    urlOriginal: photo.url_o,
-    urlSmall: photo.url_n || photo.url_m,
-    video: photo.media === 'video',
-    videoUrl: `https://www.flickr.com/photos/${process.env.REACT_APP_FLICKR_USER}/${photo.id}/play/hd/${photo.secret}`,
-  }));
-}
+import { iFlickrApiResponse, iImage } from '../consts/types';
+import { FlickrResponseToImages } from './flickrUtilities';
 
 const flickrEndPoint = 'https://api.flickr.com/services/rest/?method=';
 const flickrMethod = 'flickr.people.getPhotos';
@@ -49,7 +30,8 @@ async function GetRecent(
   const endpoint = `${flickrEndPoint}${flickrMethod}${flickrApiKey}${flickrParams}&per_page=${
     resultsPerPage || 25
   }&page=${pageNumber || 0}`;
-  return FlickerResponseToImages(await fetchFlickr(endpoint));
+  const result = await fetchFlickr(endpoint);
+  return FlickrResponseToImages(result);
 }
 
 async function Search(
@@ -63,7 +45,7 @@ async function Search(
     `tags=${tags}&tag_mode=all&text=${searchString}&per_page=${
       resultsPerPage || 25
     }&page=${pageNumber || 1}`;
-  return FlickerResponseToImages(await fetchFlickr(endpoint));
+  return FlickrResponseToImages(await fetchFlickr(endpoint));
 }
 
 async function MonthsAgo(monthsAgo: number): Promise<Array<iImage>> {
@@ -91,7 +73,7 @@ async function MonthsAgo(monthsAgo: number): Promise<Array<iImage>> {
       dateToSearch,
     )}&max_taken_date=${formatDateToFlickr(endDate(dateToSearch))}`;
 
-  return FlickerResponseToImages(await fetchFlickr(endpoint));
+  return FlickrResponseToImages(await fetchFlickr(endpoint));
 }
 
 export { GetRecent, MonthsAgo, Search };
