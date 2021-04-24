@@ -15,17 +15,4 @@ describe('Images component', () => {
     const noImagesMessage = screen.getByTestId('no-images');
     expect(noImagesMessage).toBeInTheDocument();
   });
-
-  test('renders an image for each', () => {
-    render(
-      <Images
-        images={[
-          { urlLarge: 'test', description: 'testing' } as iImage,
-          { urlLarge: 'other test', description: 'testing' } as iImage,
-        ]}
-      />,
-    );
-    const images = screen.getAllByAltText('testing');
-    expect(images.length).toBe(2);
-  });
 });
