@@ -35,8 +35,8 @@ async function GetRecent(
 }
 
 async function Search(
-  pageNumber: number,
-  resultsPerPage: number,
+  pageNumber: number | null,
+  resultsPerPage: number | null,
   tags: string | null,
   searchString: string | null,
 ): Promise<Array<iImage>> {

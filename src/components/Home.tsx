@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { GetRecent } from '../api/flickr';
 import { iImage } from '../consts/types';
+import Images from './Images';
 
 const Home: React.FC = () => {
-  // TODO: obvs just a test
   const [images, setImages] = useState<Array<iImage> | null>(null);
   const getImages = async (): Promise<void> => {
     setImages(await GetRecent(0, 20));
@@ -12,7 +12,7 @@ const Home: React.FC = () => {
     getImages();
   }, []);
 
-  return <div>Got {images?.length} images back</div>;
+  return <Images images={images} />;
 };
 
 export default Home;

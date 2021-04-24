@@ -1,6 +1,6 @@
 export interface iImage {
   date: string;
-  description?: string | null;
+  description?: string | undefined;
   largeWidth: number;
   smallWidth: number;
   smallHeight: number;
