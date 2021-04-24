@@ -1,6 +1,6 @@
-import { IconButton, Menu, MenuItem, MenuProps } from '@material-ui/core';
+import { IconButton, Menu, MenuItem, MenuProps, Link } from '@material-ui/core';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import MenuIcon from '@material-ui/icons/Menu';
 import routes from '../consts/routes';
 
@@ -25,12 +25,12 @@ const AppMenu: React.FC = () => {
         onClose={closeMenu}
       >
         <MenuItem>
-          <Link to={routes.home} onClick={closeMenu}>
+          <Link component={RouterLink} to={routes.home} onClick={closeMenu}>
             Home
           </Link>
         </MenuItem>
         <MenuItem>
-          <Link to={routes.memories} onClick={closeMenu}>
+          <Link component={RouterLink} to={routes.memories} onClick={closeMenu}>
             Memories
           </Link>
         </MenuItem>

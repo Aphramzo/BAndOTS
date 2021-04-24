@@ -2,11 +2,13 @@ export interface iImage {
   date: string;
   description?: string | undefined;
   largeWidth: number;
+  largeHeight: number;
   smallWidth: number;
   smallHeight: number;
   tags: string[];
   urlLarge: string;
   urlOriginal: string;
+  urlSmall: string;
   video: boolean;
   videoUrl?: string | null;
 }
@@ -20,6 +22,7 @@ export interface iFlickrPhoto {
   description: iFlickrDescription;
   width_l: number;
   width_n?: number | null;
+  height_l: number;
   height_n?: number | null;
   tags: string;
   url_l: string;
