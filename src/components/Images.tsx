@@ -1,5 +1,7 @@
 import React from 'react';
+import Gallery, { RenderImageProps } from 'react-photo-gallery';
 import { iImage } from '../consts/types';
+import Image from './Image';
 
 type ImagesProps = {
   images: Array<iImage> | null;
@@ -10,16 +12,28 @@ const Images: React.FC<ImagesProps> = ({ images }) => {
     return <div data-testid="no-images">No Images Found</div>;
   }
 
+  const renderImage: React.ComponentType<RenderImageProps> = ({
+    index,
+    photo,
+  }) => {
+    // The renderer here doesn't have access to the full image we want
+    // So grab it out of the array
+    const image = images?.find((i) => i.urlSmall === photo.src);
+    if (image) {
+      return <Image index={index} image={image} photo={photo} />;
+    }
+    return null;
+  };
+
   return (
-    <div>
-      {images.map((image) => {
-        return (
-          <div key={image.urlLarge}>
-            <img src={image.urlLarge} alt={image.description} />
-          </div>
-        );
-      })}
-    </div>
+    <Gallery
+      photos={images.map((image) => ({
+        src: image.urlSmall,
+        width: image.smallWidth,
+        height: image.smallHeight,
+      }))}
+      renderImage={renderImage}
+    />
   );
 };
 

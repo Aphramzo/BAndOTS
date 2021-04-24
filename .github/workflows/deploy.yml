@@ -40,6 +40,8 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: 'us-west-1'
           CDK_ACCOUNT: ${{ secrets.CDK_ACCOUNT }}
+          REACT_APP_FLICKR_API: ${{ secrets.REACT_APP_FLICKR_API}}
+          REACT_APP_FLICKR_USER: ${{ secrets.REACT_APP_FLICKR_USER}}
       - name: automerge
         uses: 'pascalgn/automerge-action@v0.6.1'
         env:
