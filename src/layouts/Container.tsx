@@ -3,6 +3,7 @@ import React from 'react';
 
 type ContainerProps = {
   children: React.ReactNode;
+  id?: string;
 };
 
 const useStyles = makeStyles(() => ({
@@ -12,9 +13,13 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Container: React.FC<ContainerProps> = ({ children }) => {
+const Container: React.FC<ContainerProps> = ({ children, id }) => {
   const classes = useStyles();
-  return <div className={classes.container}>{children}</div>;
+  return (
+    <div id={id} className={classes.container}>
+      {children}
+    </div>
+  );
 };
 
 export default Container;
