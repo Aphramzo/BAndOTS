@@ -21,7 +21,7 @@ const TitleBar: React.FC = () => {
   const classes = useStyles();
 
   return (
-    <AppBar position="static" className={classes.appBar}>
+    <AppBar position="sticky" className={classes.appBar}>
       <Toolbar>
         <AppMenu />
         <Link to="/" className={classes.title}>

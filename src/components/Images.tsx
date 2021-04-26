@@ -9,7 +9,7 @@ type ImagesProps = {
 
 const Images: React.FC<ImagesProps> = ({ images }) => {
   if (!images || images.length === 0) {
-    return <div data-testid="no-images">No Images Found</div>;
+    return <div data-testid="no-images">&nbsp;</div>;
   }
 
   const renderImage: React.ComponentType<RenderImageProps> = ({
@@ -20,7 +20,9 @@ const Images: React.FC<ImagesProps> = ({ images }) => {
     // So grab it out of the array
     const image = images?.find((i) => i.urlSmall === photo.src);
     if (image) {
-      return <Image index={index} image={image} photo={photo} />;
+      return (
+        <Image key={image.urlSmall} index={index} image={image} photo={photo} />
+      );
     }
     return null;
   };
