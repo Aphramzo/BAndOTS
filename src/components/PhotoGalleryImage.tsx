@@ -32,7 +32,6 @@ const Image: React.FC<ImageProps> = ({ image, photo }) => {
           width={photo.width}
         />
       )}
-      <div>{image.description}</div>
     </div>
   );
 };
