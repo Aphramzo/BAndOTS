@@ -1,7 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Images from './Images';
-import { iImage } from '../consts/types';
 
 describe('Images component', () => {
   test('Renders no images message if null', () => {

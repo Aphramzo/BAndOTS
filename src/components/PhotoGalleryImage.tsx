@@ -1,6 +1,9 @@
 import React from 'react';
 import { PhotoProps } from 'react-photo-gallery';
 import { iImage } from '../consts/types';
+import 'react-medium-image-zoom/dist/styles.css';
+import Video from './Video';
+import ZoomableImage from './ZoomableImage';
 
 type ImageProps = {
   image: iImage;
@@ -18,13 +21,17 @@ const Image: React.FC<ImageProps> = ({ image, photo }) => {
         overflow: 'hidden',
         margin: '2px',
       }}
+      data-testid="photo-gallery-image"
     >
-      <img
-        height={photo.height}
-        width={photo.width}
-        alt={image.description}
-        src={image.urlSmall}
-      />
+      {image.video ? (
+        <Video video={image} height={photo.height} width={photo.width} />
+      ) : (
+        <ZoomableImage
+          image={image}
+          height={photo.height}
+          width={photo.width}
+        />
+      )}
     </div>
   );
 };
