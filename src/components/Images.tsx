@@ -1,7 +1,7 @@
 import React from 'react';
 import Gallery, { RenderImageProps } from 'react-photo-gallery';
 import { iImage } from '../consts/types';
-import Image from './Image';
+import PhotoGalleryImage from './PhotoGalleryImage';
 
 type ImagesProps = {
   images: Array<iImage> | null;
@@ -21,7 +21,12 @@ const Images: React.FC<ImagesProps> = ({ images }) => {
     const image = images?.find((i) => i.urlSmall === photo.src);
     if (image) {
       return (
-        <Image key={image.urlSmall} index={index} image={image} photo={photo} />
+        <PhotoGalleryImage
+          key={image.urlSmall}
+          index={index}
+          image={image}
+          photo={photo}
+        />
       );
     }
     return null;
