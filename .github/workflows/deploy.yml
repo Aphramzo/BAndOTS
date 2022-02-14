@@ -15,6 +15,7 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       REACT_APP_FLICKR_API: ${{ secrets.REACT_APP_FLICKR_API}}
       REACT_APP_FLICKR_USER: ${{ secrets.REACT_APP_FLICKR_USER}}
+      REACT_APP_AWS_API_BASE_URL: ${{ secrets.REACT_AWS_API_BASE_URL}}
     steps:
       - name: Checkout
         uses: actions/checkout@v2

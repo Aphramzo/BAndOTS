@@ -21,25 +21,6 @@ describe('flickrApi', () => {
     });
   };
 
-  describe('GetRecent', () => {
-    it('calls endpoint as expected', async () => {
-      mockSuccess();
-      await FlickrApi.GetRecent(1, 20);
-      expect(window.fetch).toHaveBeenCalledWith(
-        `https://api.flickr.com/services/rest/?method=flickr.people.getPhotos&api_key=FAKE_API_KEY&user_id=FAKE_USER_ID&extras=date_taken,url_n,url_m,url_o,url_l,description,tags,media` +
-          '&format=json&nojsoncallback=1&sort=date-taken-desc&per_page=20&page=1',
-      );
-    });
-
-    it('returns result of FlickrResponseToImages', async () => {
-      mockSuccess();
-      const expectResult = [{ description: 'Its a trap' } as iImage];
-      mockedFlickrResponseToImages.mockImplementation(() => expectResult);
-      const result = await FlickrApi.GetRecent(1, 20);
-      expect(result).toEqual(expectResult);
-    });
-  });
-
   describe('Search', () => {
     it('defaults numbers as expected', async () => {
       mockSuccess();

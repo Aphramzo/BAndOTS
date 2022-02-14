@@ -1,8 +1,8 @@
+import axios from 'axios';
 import { iFlickrApiResponse, iImage } from '../consts/types';
 import { FlickrResponseToImages } from './flickrUtilities';
 
 const flickrEndPoint = 'https://api.flickr.com/services/rest/?method=';
-const flickrMethod = 'flickr.people.getPhotos';
 const flickSearchMethod = 'flickr.photos.search';
 const flickrApiKey = `&api_key=${process.env.REACT_APP_FLICKR_API}`;
 const flickrParams =
@@ -27,11 +27,9 @@ async function GetRecent(
   pageNumber: number,
   resultsPerPage: number,
 ): Promise<Array<iImage>> {
-  const endpoint = `${flickrEndPoint}${flickrMethod}${flickrApiKey}${flickrParams}&per_page=${
-    resultsPerPage || 25
-  }&page=${pageNumber || 0}`;
-  const result = await fetchFlickr(endpoint);
-  return FlickrResponseToImages(result);
+  const endpoint = `${process.env.REACT_APP_AWS_API_BASE_URL}/images/${pageNumber}/${resultsPerPage}`;
+  const response: { data: iImage[] } = await axios.get(endpoint);
+  return response.data;
 }
 
 async function Search(

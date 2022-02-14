@@ -14,6 +14,7 @@ const Home: React.FC = () => {
 
   const getImages = async (pageNumber: number): Promise<void> => {
     const imgs = await GetRecent(pageNumber, 20);
+
     setImages((previousImages) => {
       if (previousImages) {
         return [...previousImages, ...imgs];
